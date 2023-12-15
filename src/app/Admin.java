@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 public final class Admin {
     @Getter
     private static List<User> users = new ArrayList<>();
+    @Getter
     private static List<Song> songs = new ArrayList<>();
     private static List<Podcast> podcasts = new ArrayList<>();
     @Getter
@@ -91,15 +92,6 @@ public final class Admin {
             }
             podcasts.add(new Podcast(podcastInput.getName(), podcastInput.getOwner(), episodes));
         }
-    }
-
-    /**
-     * Gets songs.
-     *
-     * @return the songs
-     */
-    public static List<Song> getSongs() {
-        return new ArrayList<>(songs);
     }
 
     /**

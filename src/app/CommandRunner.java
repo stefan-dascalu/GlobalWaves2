@@ -75,12 +75,6 @@ public final class CommandRunner {
     public static ObjectNode search(final CommandInput commandInput) {
         User user = Admin.getUser(commandInput.getUsername());
 
-        if (user == null) {
-            ObjectNode objectNode = objectMapper.createObjectNode();
-            objectNode.put("error", "User not found");
-            return objectNode;
-        }
-
         Filters filters = new Filters(commandInput.getFilters());
 
         String type = commandInput.getType();
@@ -110,12 +104,7 @@ public final class CommandRunner {
     public static ObjectNode select(final CommandInput commandInput) {
         User user = Admin.getUser(commandInput.getUsername());
 
-        if (user == null) {
-            ObjectNode objectNode = objectMapper.createObjectNode();
-            objectNode.put("error", "User not found");
-            return objectNode;
-        }
-
+        assert user != null;
         String message = user.select(commandInput.getItemNumber());
 
         ObjectNode objectNode = objectMapper.createObjectNode();
@@ -1266,5 +1255,74 @@ public static ObjectNode addMerch(final CommandInput commandInput) {
         responseNode.put("message", albumRemovalMessage);
 
         return responseNode;
+    }
+
+    /**
+     * Prints the content of the current page of a user.
+     *
+     * @param commandInput Contains the username of the user whose current
+     *                     page content is to be printed.
+     * @return An ObjectNode with the content of the
+     * current page or an error message.
+     */
+    public static ObjectNode printCurrentPage(final CommandInput commandInput) {
+        User user = Admin.getUser(commandInput.getUsername());
+
+        if (user == null) {
+            ObjectNode objectNode = objectMapper.createObjectNode();
+            objectNode.put("user", commandInput.getUsername());
+            objectNode.put("command", commandInput.getCommand());
+            objectNode.put("timestamp", commandInput.getTimestamp());
+            objectNode.put("message", "The username " + commandInput.getUsername()
+                    + " doesn't exist.");
+            return objectNode;
+        }
+
+        String currentPageContent = user.getCurrentPageContent();
+
+        ObjectNode objectNode = objectMapper.createObjectNode();
+        objectNode.put("user", commandInput.getUsername());
+        objectNode.put("command", commandInput.getCommand());
+        objectNode.put("timestamp", commandInput.getTimestamp());
+        objectNode.put("message", currentPageContent);
+
+        return objectNode;
+    }
+
+    /**
+     * Changes the current page of a user to the next page.
+     *
+     * @param commandInput Contains the username of the user
+     *                     whose page is to be changed.
+     * @return An ObjectNode with a message indicating the new page or
+     * an error if the user does not exist.
+     */
+    public static ObjectNode changePage(final CommandInput commandInput) {
+        User user = Admin.getUser(commandInput.getUsername());
+
+        if (user == null) {
+            ObjectNode errorNode = objectMapper.createObjectNode();
+            errorNode.put("command", commandInput.getCommand());
+            errorNode.put("user", commandInput.getUsername());
+            errorNode.put("timestamp", commandInput.getTimestamp());
+            errorNode.put("message", "The username " + commandInput.getUsername()
+                    + " doesn't exist.");
+            return errorNode;
+        }
+
+        // Calculates the index of the next page to be displayed.
+        int currentPageIndex = user.getCurrentPageIndex();
+        int nextPageIndex = (currentPageIndex + 1) % user.getPages().length;
+
+        // Changes the user's current page to the next page and retrieves a success message.
+        String message = user.changePage(nextPageIndex);
+
+        ObjectNode successNode = objectMapper.createObjectNode();
+        successNode.put("command", commandInput.getCommand());
+        successNode.put("user", commandInput.getUsername());
+        successNode.put("timestamp", commandInput.getTimestamp());
+        successNode.put("message", message);
+
+        return successNode;
     }
 }

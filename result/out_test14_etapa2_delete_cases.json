@@ -81,23 +81,23 @@
   "command" : "search",
   "user" : "melodicwanderer",
   "timestamp" : 315,
-  "message" : "Search returned 0 results",
-  "results" : [ ]
+  "message" : "Search returned 2 results",
+  "results" : [ "Aurora Harmony", "Azure Echoes" ]
 }, {
   "command" : "select",
   "user" : "melodicwanderer",
   "timestamp" : 320,
-  "message" : "The selected ID is too high."
+  "message" : "Successfully selected Azure Echoes."
 }, {
   "command" : "load",
   "user" : "melodicwanderer",
   "timestamp" : 325,
-  "message" : "Please select a source before attempting to load."
+  "message" : "Playback loaded successfully."
 }, {
   "command" : "addRemoveInPlaylist",
   "user" : "melodicwanderer",
   "timestamp" : 330,
-  "message" : "Please load a source before adding to or removing from the playlist."
+  "message" : "Successfully added to playlist."
 }, {
   "command" : "search",
   "user" : "alice22",
@@ -134,28 +134,33 @@
   "command" : "search",
   "user" : "bob35",
   "timestamp" : 365,
-  "message" : "Search returned 0 results",
-  "results" : [ ]
+  "message" : "Search returned 1 results",
+  "results" : [ "Aurora Harmony" ]
 }, {
   "command" : "select",
   "user" : "bob35",
   "timestamp" : 370,
-  "message" : "The selected ID is too high."
+  "message" : "Successfully selected Aurora Harmony."
 }, {
   "command" : "load",
   "user" : "bob35",
   "timestamp" : 375,
-  "message" : "Please select a source before attempting to load."
+  "message" : "Playback loaded successfully."
 }, {
   "command" : "like",
   "user" : "bob35",
   "timestamp" : 380,
-  "message" : "Please load a source before liking or unliking."
+  "message" : "Like registered successfully."
 }, {
   "command" : "repeat",
   "user" : "melodicwanderer",
   "timestamp" : 480,
-  "message" : "Please load a source before setting the repeat status."
+  "message" : "Repeat mode changed to repeat once."
+}, {
+  "user" : "bob35",
+  "command" : "printCurrentPage",
+  "timestamp" : 525,
+  "message" : "Liked songs:\n\t[Aurora Harmony]\n\nFollowed playlists:\n\t[Playlist bengos]"
 }, {
   "command" : "deleteUser",
   "user" : "sonicpainter",
@@ -192,7 +197,7 @@
   "command" : "load",
   "user" : "carol19",
   "timestamp" : 740,
-  "message" : "You can't load an empty audio collection!"
+  "message" : "Playback loaded successfully."
 }, {
   "command" : "search",
   "user" : "david27",
@@ -210,6 +215,11 @@
   "timestamp" : 930,
   "message" : "audiosage was successfully deleted."
 }, {
+  "command" : "changePage",
+  "user" : "soundseeker21",
+  "timestamp" : 955,
+  "message" : "soundseeker21 accessed LikedContent successfully."
+}, {
   "command" : "deleteUser",
   "user" : "melodicwanderer",
   "timestamp" : 960,
@@ -218,7 +228,7 @@
   "command" : "repeat",
   "user" : "carol19",
   "timestamp" : 965,
-  "message" : "Please load a source before setting the repeat status."
+  "message" : "Repeat mode changed to repeat all."
 }, {
   "command" : "deleteUser",
   "user" : "sonicpainter",
@@ -253,7 +263,7 @@
   "command" : "repeat",
   "user" : "carol19",
   "timestamp" : 7200,
-  "message" : "Please load a source before setting the repeat status."
+  "message" : "Repeat mode changed to repeat current song."
 }, {
   "command" : "deleteUser",
   "user" : "sonicpainter",
@@ -263,7 +273,7 @@
   "command" : "repeat",
   "user" : "carol19",
   "timestamp" : 7505,
-  "message" : "Please load a source before setting the repeat status."
+  "message" : "Repeat mode changed to no repeat."
 }, {
   "command" : "deleteUser",
   "user" : "melodicwanderer",
@@ -275,8 +285,18 @@
   "timestamp" : 7860,
   "message" : "sonicpainter can't be deleted."
 }, {
+  "command" : "changePage",
+  "user" : "david27",
+  "timestamp" : 7885,
+  "message" : "david27 accessed LikedContent successfully."
+}, {
   "command" : "deleteUser",
   "user" : "sonicpainter",
   "timestamp" : 7890,
   "message" : "sonicpainter can't be deleted."
+}, {
+  "user" : "bob35",
+  "command" : "printCurrentPage",
+  "timestamp" : 7900,
+  "message" : "Liked songs:\n\t[Aurora Harmony]\n\nFollowed playlists:\n\t[Playlist bengos]"
 } ]

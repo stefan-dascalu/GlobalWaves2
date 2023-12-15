@@ -63,6 +63,11 @@
     "episodes" : [ "The Roots of Blues", "Classical Music's Modern Impact", "Jazz Journeys", "The Folk Revival" ]
   } ]
 }, {
+  "user" : "jack29",
+  "command" : "printCurrentPage",
+  "timestamp" : 53,
+  "message" : "Liked songs:\n\t[]\n\nFollowed playlists:\n\t[]"
+}, {
   "command" : "addPodcast",
   "user" : "soundseeker",
   "timestamp" : 53,
@@ -136,6 +141,11 @@
     "shuffle" : false,
     "paused" : false
   }
+}, {
+  "user" : "jack29",
+  "command" : "printCurrentPage",
+  "timestamp" : 90,
+  "message" : "Liked songs:\n\t[]\n\nFollowed playlists:\n\t[]"
 }, {
   "command" : "playPause",
   "user" : "alice22",

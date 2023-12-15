@@ -129,6 +129,8 @@ public final class Main {
                 case "addAnnouncement" -> outputs.add(CommandRunner.addAnnouncement(command));
                 case "removeAnnouncement" -> outputs.add(CommandRunner.removeAnnouncement(command));
                 case "deleteUser" -> outputs.add(CommandRunner.deleteUser(command));
+                case "changePage" -> outputs.add(CommandRunner.changePage(command));
+                case "printCurrentPage" -> outputs.add(CommandRunner.printCurrentPage(command));
                 default -> System.out.println("Invalid command " + commandName);
             }
         }

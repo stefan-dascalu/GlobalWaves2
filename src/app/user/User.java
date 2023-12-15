@@ -21,6 +21,7 @@ import app.audio.LibraryEntry;
 //import app.pages.LikedContent;
 //import app.pages.Artist;
 //import app.pages.Page;
+import app.pages.*;
 import app.player.Player;
 import app.player.PlayerStats;
 import app.searchBar.Filters;
@@ -71,6 +72,10 @@ public class User {
     private final String type;
     @Setter
     private boolean isConnected;
+    @Getter
+    private final Page[] pages = new Page[Enums.PageType.values().length];
+    @Getter
+    private int currentPageIndex;
 
 
     /**
@@ -97,6 +102,14 @@ public class User {
         this.events = new ArrayList<>();
         this.announcements = new ArrayList<>();
         this.createdPodcasts = new ArrayList<>();
+        this.pages[Enums.PageType.HOME.ordinal()] = new Home(this);
+        this.pages[Enums.PageType.LIKED_CONTENT.ordinal()] = new LikedContent(this);
+        if ("artist".equalsIgnoreCase(this.type)) {
+            this.pages[Enums.PageType.ARTIST.ordinal()] = new Artist(this);
+        } else if ("host".equalsIgnoreCase(this.type)) {
+            this.pages[Enums.PageType.HOST.ordinal()] = new Host(this);
+        }
+        this.currentPageIndex = 0;
     }
 
     /**
@@ -890,4 +903,35 @@ public class User {
     public List<Podcast> getPodcasts() {
         return createdPodcasts;
     }
+
+    /**
+     * Changes the current page index of the user to a specified page.
+     * It checks if the requested page index is valid and if the page exists.
+     *
+     * @param pageIndex The index of the page to be accessed.
+     * @return A message indicating the outcome of the page change.
+     */
+    public String changePage(int pageIndex) {
+        if (pageIndex < 0 || pageIndex >= pages.length || this.pages[pageIndex] == null) {
+            return username + " is trying to access a non-existent page.";
+        } else {
+            currentPageIndex = pageIndex;
+            return username + " accessed "
+                    + pages[pageIndex].getClass().getSimpleName() + " successfully.";
+        }
+    }
+
+    /**
+     * Fetches the content of the current page the user is viewing.
+     * It checks the user's connection status before attempting to retrieve the page content.
+     *
+     * @return Content of the current page or a message if the user is offline.
+     */
+    public String getCurrentPageContent() {
+        if (!isConnected) {
+            return username + " is offline.";
+        }
+        return pages[currentPageIndex].getContent();
+    }
+
 }

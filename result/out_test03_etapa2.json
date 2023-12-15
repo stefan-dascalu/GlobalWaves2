@@ -64,6 +64,11 @@
   "timestamp" : 70,
   "message" : "The selected ID is too high."
 }, {
+  "user" : "alice22",
+  "command" : "printCurrentPage",
+  "timestamp" : 75,
+  "message" : "Liked songs:\n\t[]\n\nFollowed playlists:\n\t[]"
+}, {
   "command" : "addMerch",
   "user" : "melodymaster",
   "timestamp" : 80,
@@ -110,4 +115,14 @@
   "user" : "bob35",
   "timestamp" : 110,
   "message" : "The selected ID is too high."
+}, {
+  "user" : "alice22",
+  "command" : "printCurrentPage",
+  "timestamp" : 115,
+  "message" : "alice22 is offline."
+}, {
+  "user" : "bob35",
+  "command" : "printCurrentPage",
+  "timestamp" : 120,
+  "message" : "Liked songs:\n\t[]\n\nFollowed playlists:\n\t[]"
 } ]
