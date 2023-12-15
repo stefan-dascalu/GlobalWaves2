@@ -2,7 +2,7 @@
   "command" : "search",
   "user" : "alice22",
   "timestamp" : 10,
-  "message" : "message",
+  "message" : "Search returned 1 results",
   "results" : [ "TED Radio Hour" ]
 }, {
   "command" : "select",
@@ -26,10 +26,15 @@
     "paused" : false
   }
 }, {
+  "command" : "addUser",
+  "user" : "soundseeker",
+  "timestamp" : 50,
+  "message" : "The username soundseeker has been added successfully."
+}, {
   "command" : "search",
   "user" : "alice22",
   "timestamp" : 55,
-  "message" : "message",
+  "message" : "Search returned 0 results",
   "results" : [ ]
 }, {
   "command" : "select",
@@ -40,7 +45,7 @@
   "command" : "search",
   "user" : "alice22",
   "timestamp" : 60,
-  "message" : "message",
+  "message" : "Search returned 1 results",
   "results" : [ "TED Radio Hour" ]
 }, {
   "command" : "select",
@@ -67,7 +72,7 @@
   "command" : "search",
   "user" : "alice22",
   "timestamp" : 75,
-  "message" : "message",
+  "message" : "Search returned 0 results",
   "results" : [ ]
 }, {
   "command" : "select",
@@ -115,7 +120,7 @@
   "command" : "search",
   "user" : "alice22",
   "timestamp" : 3215,
-  "message" : "message",
+  "message" : "Search returned 2 results",
   "results" : [ "Freedom", "Freedom" ]
 }, {
   "command" : "select",
@@ -136,7 +141,7 @@
   "command" : "search",
   "user" : "alice22",
   "timestamp" : 3235,
-  "message" : "message",
+  "message" : "Search returned 1 results",
   "results" : [ "Happier" ]
 }, {
   "command" : "select",
@@ -149,6 +154,16 @@
   "timestamp" : 3245,
   "message" : "Playback loaded successfully."
 }, {
+  "command" : "addUser",
+  "user" : "magichost",
+  "timestamp" : 3247,
+  "message" : "The username magichost has been added successfully."
+}, {
+  "command" : "addUser",
+  "user" : "magichost",
+  "timestamp" : 3247,
+  "message" : "The username magichost is already taken."
+}, {
   "command" : "addRemoveInPlaylist",
   "user" : "alice22",
   "timestamp" : 3250,
@@ -157,7 +172,7 @@
   "command" : "search",
   "user" : "alice22",
   "timestamp" : 3255,
-  "message" : "message",
+  "message" : "Search returned 1 results",
   "results" : [ "2010 hits" ]
 }, {
   "command" : "select",

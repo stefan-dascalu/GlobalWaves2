@@ -6,9 +6,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
-@Data
-@Getter
+
 @Setter
+@Getter
+@Data
 public class Filters {
     private String name;
     private String album;

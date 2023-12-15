@@ -1,4 +1,14 @@
 [ {
+  "command" : "addUser",
+  "user" : "melodymaster",
+  "timestamp" : 2,
+  "message" : "The username melodymaster has been added successfully."
+}, {
+  "command" : "addAlbum",
+  "user" : "melodymaster",
+  "timestamp" : 4,
+  "message" : "melodymaster has added new album successfully."
+}, {
   "command" : "createPlaylist",
   "user" : "bob35",
   "timestamp" : 150,
@@ -7,7 +17,7 @@
   "command" : "search",
   "user" : "bob35",
   "timestamp" : 170,
-  "message" : "message",
+  "message" : "Search returned 0 results",
   "results" : [ ]
 }, {
   "command" : "select",
@@ -28,7 +38,7 @@
   "command" : "search",
   "user" : "bob35",
   "timestamp" : 270,
-  "message" : "message",
+  "message" : "Search returned 5 results",
   "results" : [ "Shape of You", "Don't", "Maps", "The Man", "Freedom" ]
 }, {
   "command" : "select",
@@ -49,7 +59,7 @@
   "command" : "search",
   "user" : "bob35",
   "timestamp" : 370,
-  "message" : "message",
+  "message" : "Search returned 5 results",
   "results" : [ "Stairway to Heaven", "Under Pressure", "Dream On", "Big Pimpin'", "The Unforgiven" ]
 }, {
   "command" : "select",
@@ -70,7 +80,7 @@
   "command" : "search",
   "user" : "bob35",
   "timestamp" : 440,
-  "message" : "message",
+  "message" : "Search returned 0 results",
   "results" : [ ]
 }, {
   "command" : "select",
@@ -102,7 +112,7 @@
   "command" : "search",
   "user" : "bob35",
   "timestamp" : 500,
-  "message" : "message",
+  "message" : "Search returned 1 results",
   "results" : [ "My favourite songs" ]
 }, {
   "command" : "select",
@@ -179,10 +189,15 @@
     "paused" : false
   }
 }, {
+  "command" : "addUser",
+  "user" : "soundseeker",
+  "timestamp" : 715,
+  "message" : "The username soundseeker has been added successfully."
+}, {
   "command" : "search",
   "user" : "bob35",
   "timestamp" : 800,
-  "message" : "message",
+  "message" : "Search returned 0 results",
   "results" : [ ]
 }, {
   "command" : "select",
@@ -225,7 +240,7 @@
   "command" : "search",
   "user" : "bob35",
   "timestamp" : 1198,
-  "message" : "message",
+  "message" : "Search returned 0 results",
   "results" : [ ]
 }, {
   "command" : "select",

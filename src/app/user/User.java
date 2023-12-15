@@ -1,8 +1,7 @@
 package app.user;
 
-import app.audio.Collections.AudioCollection;
-import app.audio.Collections.Playlist;
-import app.audio.Collections.PlaylistOutput;
+import app.Admin;
+import app.audio.Collections.*;
 import app.audio.Files.AudioFile;
 import app.audio.Files.Song;
 import app.audio.LibraryEntry;
@@ -11,10 +10,15 @@ import app.player.PlayerStats;
 import app.searchBar.Filters;
 import app.searchBar.SearchBar;
 import app.utils.Enums;
+import fileio.input.SongInput;
 import lombok.Getter;
+import lombok.Setter;
+import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * The type User.
@@ -30,11 +34,19 @@ public class User {
     private ArrayList<Playlist> playlists;
     @Getter
     private ArrayList<Song> likedSongs;
+    @Setter
+    @Getter
+    private ArrayList<Album> albums;
     @Getter
     private ArrayList<Playlist> followedPlaylists;
     private final Player player;
     private final SearchBar searchBar;
     private boolean lastSearched;
+    @Getter
+    private final String type;
+    @Setter
+    private boolean isConnected;
+
 
     /**
      * Instantiates a new User.
@@ -43,13 +55,16 @@ public class User {
      * @param age      the age
      * @param city     the city
      */
-    public User(final String username, final int age, final String city) {
+    public User(final String username, final int age, final String city, final String type) {
         this.username = username;
         this.age = age;
         this.city = city;
+        this.type = type;
+        isConnected = true;
         playlists = new ArrayList<>();
         likedSongs = new ArrayList<>();
         followedPlaylists = new ArrayList<>();
+        albums = new ArrayList<>();
         player = new Player();
         searchBar = new SearchBar(username);
         lastSearched = false;
@@ -481,4 +496,149 @@ public class User {
     public void simulateTime(final int time) {
         player.simulatePlayer(time);
     }
+
+    /**
+     * Converts a string representation of a repeat mode into the
+     * corresponding Enums.RepeatMode value.
+     * This method maps specific string patterns to their associated Enums.RepeatMode values.
+     *
+     * @param repeatString The string representation of the repeat mode.
+     *                     Expected values are "Repeat All", "Repeat Once", "Repeat Infinite",
+     *                     and "Repeat Current Song". Any other value will
+     *                     default to Enums.RepeatMode.NO_REPEAT.
+     * @return The Enums.RepeatMode value that corresponds to the provided string.
+     */
+    private Enums.RepeatMode getRepeatModeFromString(final String repeatString) {
+        return switch (repeatString) {
+            case "Repeat All" -> Enums.RepeatMode.REPEAT_ALL;
+            case "Repeat Once" -> Enums.RepeatMode.REPEAT_ONCE;
+            case "Repeat Infinite" -> Enums.RepeatMode.REPEAT_INFINITE;
+            case "Repeat Current Song" -> Enums.RepeatMode.REPEAT_CURRENT_SONG;
+            default -> Enums.RepeatMode.NO_REPEAT;
+        };
+    }
+
+    /**
+     * Check if it is connected.
+     */
+    public boolean isConnected() {
+        return isConnected;
+    }
+
+    /**
+     * Switches the connection status of the user.
+     * Only available for regular users, not artists or hosts.
+     *
+     * @return a message indicating the new connection status or an error message.
+     */
+    public String switchConnectionStatus() {
+        if ("artist".equalsIgnoreCase(this.type) || "host".equalsIgnoreCase(this.type)) {
+            return "This operation is not available for artists or hosts.";
+        }
+
+        isConnected = !isConnected;
+        player.setConnectionStatus(isConnected);
+        return username + " has changed status successfully.";
+    }
+
+    /**
+     * Adds a new album to the user's collection.
+     * Verifies if the album name is unique and checks for
+     * duplicate songs within the album.
+     *
+     * @param albumName   The name of the new album.
+     * @param releaseYear The release year of the album.
+     * @param songInputs  A list of SongInput objects representing the
+     *                    songs to be added to the album.
+     * @return A message indicating the success or failure of the album addition.
+     */
+    public String addAlbum(final String albumName, final int releaseYear,
+                           final List<SongInput> songInputs) {
+        if (type == null || type.equals("host")) {
+            return username + " is not an artist.";
+        }
+        if (albums.stream().anyMatch(a -> a.getName().equals(albumName))) {
+            return username + " has another album with the same name.";
+        }
+
+        Set<String> uniqueSongNames = new HashSet<>();
+        for (SongInput songInput : songInputs) {
+            if (!uniqueSongNames.add(songInput.getName())) {
+                return username + " has the same song at least twice in this album.";
+            }
+        }
+
+        Album newAlbum = getAlbum(albumName, releaseYear, songInputs);
+        albums.add(newAlbum);
+        Admin.getAlbums().add(newAlbum);
+        return username + " has added new album successfully.";
+    }
+
+    private Album getAlbum(String albumName, int releaseYear, List<SongInput> songInputs) {
+        List<Song> songs = Admin.getSongs();
+        ArrayList<Song> songs1 = new ArrayList<>();
+        Album newAlbum = new Album(albumName, this.username, releaseYear);
+        for (SongInput songInput : songInputs) {
+            Song newSong = new Song(
+                    songInput.getName(), songInput.getDuration(),
+                    albumName, songInput.getTags(), songInput.getLyrics(),
+                    songInput.getGenre(), songInput.getReleaseYear(),
+                    songInput.getArtist()
+            );
+            songs.add(newSong);
+            songs1.add(newSong);
+        }
+        newAlbum.setSongs(songs1);
+        return newAlbum;
+    }
+
+    /**
+     * Shows the albums associated with the user.
+     * Converts each album to an AlbumOutput format for display or further processing.
+     *
+     * @return An ArrayList of AlbumOutput objects representing the user's albums.
+     */
+    public ArrayList<AlbumOutput> showAlbums() {
+        ArrayList<AlbumOutput> albumOutputs = new ArrayList<>();
+        for (Album album : albums) {
+            albumOutputs.add(new AlbumOutput(album));
+        }
+        return albumOutputs;
+    }
+
+    /**
+     * Checks if the current audio file being played is a song from a specified album.
+     * Verifies if the currently playing audio file is a Song instance and then
+     * compares its album name with the provided album name.
+     *
+     * @param albumName The name of the album to check against the currently playing song's album.
+     * @return true if the currently playing audio file is a song from the
+     * specified album, false otherwise.
+     */
+    public boolean isPlayingAlbum(final String albumName) {
+        if (player.getCurrentAudioFile() instanceof Song currentSong) {
+            return currentSong.getAlbum().equalsIgnoreCase(albumName);
+        }
+        return false;
+    }
+
+    /**
+     * Check if it is artist.
+     */
+    public boolean isArtist() {
+        return "artist".equalsIgnoreCase(this.type);
+    }
+
+    /**
+     * Check if it is host.
+     */
+    public boolean isHost() {
+        return "host".equalsIgnoreCase(this.type);
+    }
+    /**
+     * Checks if merchandise with a given name already exists.
+     *
+     * @param merchandiseName The name of the merchandise to check.
+     * @return true if merchandise with the same name exists, false otherwise.
+     */
 }

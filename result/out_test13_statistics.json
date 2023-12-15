@@ -4,6 +4,26 @@
   "timestamp" : 130,
   "message" : "Playlist created successfully."
 }, {
+  "command" : "addUser",
+  "user" : "melodymaster",
+  "timestamp" : 140,
+  "message" : "The username melodymaster has been added successfully."
+}, {
+  "command" : "addAlbum",
+  "user" : "melodymaster",
+  "timestamp" : 142,
+  "message" : "melodymaster has added new album successfully."
+}, {
+  "command" : "addUser",
+  "user" : "melodymaster 2",
+  "timestamp" : 143,
+  "message" : "The username melodymaster 2 has been added successfully."
+}, {
+  "command" : "addAlbum",
+  "user" : "melodymaster 2",
+  "timestamp" : 144,
+  "message" : "melodymaster 2 has added new album successfully."
+}, {
   "command" : "createPlaylist",
   "user" : "bob35",
   "timestamp" : 150,
@@ -12,7 +32,7 @@
   "command" : "search",
   "user" : "bob35",
   "timestamp" : 170,
-  "message" : "message",
+  "message" : "Search returned 0 results",
   "results" : [ ]
 }, {
   "command" : "select",
@@ -43,7 +63,7 @@
   "command" : "search",
   "user" : "carol19",
   "timestamp" : 270,
-  "message" : "message",
+  "message" : "Search returned 3 results",
   "results" : [ "Freedom", "Happy", "Freedom" ]
 }, {
   "command" : "select",
@@ -69,7 +89,7 @@
   "command" : "search",
   "user" : "carol19",
   "timestamp" : 370,
-  "message" : "message",
+  "message" : "Search returned 3 results",
   "results" : [ "Bohemian Rhapsody", "We Will Rock You", "Radio Ga Ga" ]
 }, {
   "command" : "select",
@@ -90,7 +110,7 @@
   "command" : "search",
   "user" : "carol19",
   "timestamp" : 470,
-  "message" : "message",
+  "message" : "Search returned 2 results",
   "results" : [ "Angie", "Nothing Else Matters" ]
 }, {
   "command" : "select",
@@ -111,7 +131,7 @@
   "command" : "search",
   "user" : "carol19",
   "timestamp" : 770,
-  "message" : "message",
+  "message" : "Search returned 3 results",
   "results" : [ "Freedom", "Happy", "Freedom" ]
 }, {
   "command" : "select",
@@ -142,7 +162,7 @@
   "command" : "search",
   "user" : "david27",
   "timestamp" : 1170,
-  "message" : "message",
+  "message" : "Search returned 2 results",
   "results" : [ "Angie", "Nothing Else Matters" ]
 }, {
   "command" : "select",
@@ -173,7 +193,7 @@
   "command" : "search",
   "user" : "emily30",
   "timestamp" : 2170,
-  "message" : "message",
+  "message" : "Search returned 3 results",
   "results" : [ "Bohemian Rhapsody", "We Will Rock You", "Radio Ga Ga" ]
 }, {
   "command" : "select",
@@ -209,7 +229,7 @@
   "command" : "search",
   "user" : "emily30",
   "timestamp" : 2460,
-  "message" : "message",
+  "message" : "Search returned 1 results",
   "results" : [ "My first playlist" ]
 }, {
   "command" : "select",
@@ -229,7 +249,7 @@
   "command" : "search",
   "user" : "bob35",
   "timestamp" : 2565,
-  "message" : "message",
+  "message" : "Search returned 1 results",
   "results" : [ "Just for fun" ]
 }, {
   "command" : "select",
@@ -245,7 +265,7 @@
   "command" : "search",
   "user" : "david27",
   "timestamp" : 2765,
-  "message" : "message",
+  "message" : "Search returned 1 results",
   "results" : [ "Just for fun" ]
 }, {
   "command" : "select",
@@ -275,4 +295,8 @@
   "command" : "getTop5Songs",
   "timestamp" : 3300,
   "result" : [ "Bohemian Rhapsody", "Angie", "Shape of You", "Don't", "Stairway to Heaven" ]
+}, {
+  "command" : "getTop5Albums",
+  "timestamp" : 3480,
+  "result" : [ "Harmonic Horizons", "Harmonic Horizons 2" ]
 } ]

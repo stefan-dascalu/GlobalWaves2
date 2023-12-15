@@ -2,7 +2,7 @@
   "command" : "search",
   "user" : "alice22",
   "timestamp" : 10,
-  "message" : "message",
+  "message" : "Search returned 1 results",
   "results" : [ "TED Radio Hour" ]
 }, {
   "command" : "select",
@@ -29,7 +29,7 @@
   "command" : "search",
   "user" : "alice22",
   "timestamp" : 60,
-  "message" : "message",
+  "message" : "Search returned 1 results",
   "results" : [ "Stairway to Heaven" ]
 }, {
   "command" : "select",
@@ -45,7 +45,7 @@
   "command" : "search",
   "user" : "alice22",
   "timestamp" : 75,
-  "message" : "message",
+  "message" : "Search returned 1 results",
   "results" : [ "TED Radio Hour" ]
 }, {
   "command" : "select",
@@ -93,7 +93,7 @@
   "command" : "search",
   "user" : "alice22",
   "timestamp" : 3215,
-  "message" : "message",
+  "message" : "Search returned 2 results",
   "results" : [ "Freedom", "Freedom" ]
 }, {
   "command" : "select",
@@ -114,7 +114,7 @@
   "command" : "search",
   "user" : "alice22",
   "timestamp" : 3235,
-  "message" : "message",
+  "message" : "Search returned 1 results",
   "results" : [ "Happier" ]
 }, {
   "command" : "select",
@@ -135,7 +135,7 @@
   "command" : "search",
   "user" : "alice22",
   "timestamp" : 3255,
-  "message" : "message",
+  "message" : "Search returned 1 results",
   "results" : [ "2010 hits" ]
 }, {
   "command" : "select",
