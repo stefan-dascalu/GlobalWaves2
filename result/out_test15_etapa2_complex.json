@@ -4903,7 +4903,7 @@
     "remainedTime" : 231,
     "repeat" : "No Repeat",
     "shuffle" : false,
-    "paused" : true
+    "paused" : false
   }
 }, {
   "command" : "switchConnectionStatus",
@@ -4923,7 +4923,12 @@
   "command" : "shuffle",
   "user" : "alice22",
   "timestamp" : 5429,
-  "message" : "The loaded source is not a playlist."
+  "message" : "The loaded source is not a playlist or an album."
+}, {
+  "command" : "removeAlbum",
+  "user" : "jacobdean",
+  "timestamp" : 5433,
+  "message" : "jacobdean can't delete this album."
 }, {
   "command" : "status",
   "user" : "alice22",
@@ -4997,7 +5002,7 @@
     "remainedTime" : 248,
     "repeat" : "No Repeat",
     "shuffle" : false,
-    "paused" : true
+    "paused" : false
   }
 }, {
   "command" : "switchConnectionStatus",
@@ -5017,7 +5022,12 @@
   "command" : "shuffle",
   "user" : "bob35",
   "timestamp" : 5740,
-  "message" : "The loaded source is not a playlist."
+  "message" : "The loaded source is not a playlist or an album."
+}, {
+  "command" : "removeAlbum",
+  "user" : "leslie27",
+  "timestamp" : 5744,
+  "message" : "leslie27 can't delete this album."
 }, {
   "command" : "status",
   "user" : "bob35",
@@ -5091,7 +5101,7 @@
     "remainedTime" : 280,
     "repeat" : "No Repeat",
     "shuffle" : false,
-    "paused" : true
+    "paused" : false
   }
 }, {
   "command" : "switchConnectionStatus",
@@ -5108,10 +5118,20 @@
   "timestamp" : 6041,
   "result" : [ "alice22", "bob35", "carol19", "david27", "emily30", "frank21", "grace25", "henry26", "irene33", "jack29" ]
 }, {
+  "command" : "deleteUser",
+  "user" : "cbutler",
+  "timestamp" : 6046,
+  "message" : "cbutler was successfully deleted."
+}, {
   "command" : "shuffle",
   "user" : "carol19",
   "timestamp" : 6051,
-  "message" : "The loaded source is not a playlist."
+  "message" : "The loaded source is not a playlist or an album."
+}, {
+  "command" : "removeAlbum",
+  "user" : "cbutler",
+  "timestamp" : 6055,
+  "message" : "The username cbutler doesn't exist."
 }, {
   "command" : "status",
   "user" : "carol19",
@@ -5185,7 +5205,7 @@
     "remainedTime" : 232,
     "repeat" : "No Repeat",
     "shuffle" : false,
-    "paused" : true
+    "paused" : false
   }
 }, {
   "command" : "switchConnectionStatus",
@@ -5205,7 +5225,12 @@
   "command" : "shuffle",
   "user" : "david27",
   "timestamp" : 6362,
-  "message" : "The loaded source is not a playlist."
+  "message" : "The loaded source is not a playlist or an album."
+}, {
+  "command" : "removeAlbum",
+  "user" : "charlesgarcia",
+  "timestamp" : 6366,
+  "message" : "charlesgarcia is not an artist or doesn't exist."
 }, {
   "command" : "status",
   "user" : "david27",
@@ -5279,7 +5304,7 @@
     "remainedTime" : 231,
     "repeat" : "No Repeat",
     "shuffle" : false,
-    "paused" : true
+    "paused" : false
   }
 }, {
   "command" : "switchConnectionStatus",
@@ -5299,7 +5324,12 @@
   "command" : "shuffle",
   "user" : "emily30",
   "timestamp" : 6673,
-  "message" : "The loaded source is not a playlist."
+  "message" : "The loaded source is not a playlist or an album."
+}, {
+  "command" : "removeAlbum",
+  "user" : "jacobdean",
+  "timestamp" : 6677,
+  "message" : "jacobdean can't delete this album."
 }, {
   "command" : "status",
   "user" : "emily30",
@@ -5373,7 +5403,7 @@
     "remainedTime" : 239,
     "repeat" : "No Repeat",
     "shuffle" : false,
-    "paused" : true
+    "paused" : false
   }
 }, {
   "command" : "switchConnectionStatus",
@@ -5393,7 +5423,12 @@
   "command" : "shuffle",
   "user" : "frank21",
   "timestamp" : 6984,
-  "message" : "The loaded source is not a playlist."
+  "message" : "The loaded source is not a playlist or an album."
+}, {
+  "command" : "removeAlbum",
+  "user" : "amanda16",
+  "timestamp" : 6988,
+  "message" : "amanda16 can't delete this album."
 }, {
   "command" : "status",
   "user" : "frank21",
@@ -5467,7 +5502,7 @@
     "remainedTime" : 184,
     "repeat" : "No Repeat",
     "shuffle" : false,
-    "paused" : true
+    "paused" : false
   }
 }, {
   "command" : "switchConnectionStatus",
@@ -5487,7 +5522,12 @@
   "command" : "shuffle",
   "user" : "grace25",
   "timestamp" : 7295,
-  "message" : "The loaded source is not a playlist."
+  "message" : "The loaded source is not a playlist or an album."
+}, {
+  "command" : "removeAlbum",
+  "user" : "barmstrong",
+  "timestamp" : 7299,
+  "message" : "barmstrong can't delete this album."
 }, {
   "command" : "status",
   "user" : "grace25",
@@ -5561,7 +5601,7 @@
     "remainedTime" : 239,
     "repeat" : "No Repeat",
     "shuffle" : false,
-    "paused" : true
+    "paused" : false
   }
 }, {
   "command" : "switchConnectionStatus",
@@ -5581,7 +5621,12 @@
   "command" : "shuffle",
   "user" : "henry26",
   "timestamp" : 7606,
-  "message" : "The loaded source is not a playlist."
+  "message" : "The loaded source is not a playlist or an album."
+}, {
+  "command" : "removeAlbum",
+  "user" : "amanda16",
+  "timestamp" : 7610,
+  "message" : "amanda16 can't delete this album."
 }, {
   "command" : "status",
   "user" : "henry26",
@@ -5655,7 +5700,7 @@
     "remainedTime" : 228,
     "repeat" : "No Repeat",
     "shuffle" : false,
-    "paused" : true
+    "paused" : false
   }
 }, {
   "command" : "switchConnectionStatus",
@@ -5675,7 +5720,12 @@
   "command" : "shuffle",
   "user" : "irene33",
   "timestamp" : 7917,
-  "message" : "The loaded source is not a playlist."
+  "message" : "The loaded source is not a playlist or an album."
+}, {
+  "command" : "removeAlbum",
+  "user" : "jacobdean",
+  "timestamp" : 7921,
+  "message" : "jacobdean can't delete this album."
 }, {
   "command" : "status",
   "user" : "irene33",
@@ -5749,7 +5799,7 @@
     "remainedTime" : 280,
     "repeat" : "No Repeat",
     "shuffle" : false,
-    "paused" : true
+    "paused" : false
   }
 }, {
   "command" : "switchConnectionStatus",
@@ -5769,7 +5819,12 @@
   "command" : "shuffle",
   "user" : "jack29",
   "timestamp" : 8228,
-  "message" : "The loaded source is not a playlist."
+  "message" : "The loaded source is not a playlist or an album."
+}, {
+  "command" : "removeAlbum",
+  "user" : "cbutler",
+  "timestamp" : 8232,
+  "message" : "The username cbutler doesn't exist."
 }, {
   "command" : "status",
   "user" : "jack29",
@@ -14309,7 +14364,7 @@
   "command" : "addAlbum",
   "user" : "cbutler",
   "timestamp" : 11809,
-  "message" : "cbutler has added new album successfully."
+  "message" : "The username cbutler doesn't exist."
 }, {
   "command" : "search",
   "user" : "frank21",
@@ -14741,7 +14796,7 @@
   "command" : "addAlbum",
   "user" : "cbutler",
   "timestamp" : 12079,
-  "message" : "cbutler has added new album successfully."
+  "message" : "The username cbutler doesn't exist."
 }, {
   "command" : "search",
   "user" : "carol19",
@@ -15125,7 +15180,7 @@
   "command" : "addAlbum",
   "user" : "cbutler",
   "timestamp" : 12319,
-  "message" : "cbutler has added new album successfully."
+  "message" : "The username cbutler doesn't exist."
 }, {
   "command" : "search",
   "user" : "grace25",
@@ -15285,7 +15340,7 @@
   "command" : "addAlbum",
   "user" : "cbutler",
   "timestamp" : 12419,
-  "message" : "cbutler has added new album successfully."
+  "message" : "The username cbutler doesn't exist."
 }, {
   "command" : "search",
   "user" : "grace25",
@@ -15333,7 +15388,7 @@
   "command" : "addAlbum",
   "user" : "cbutler",
   "timestamp" : 12449,
-  "message" : "cbutler has added new album successfully."
+  "message" : "The username cbutler doesn't exist."
 }, {
   "command" : "search",
   "user" : "jack29",
@@ -15509,7 +15564,7 @@
   "command" : "addAlbum",
   "user" : "cbutler",
   "timestamp" : 12559,
-  "message" : "cbutler has added new album successfully."
+  "message" : "The username cbutler doesn't exist."
 }, {
   "command" : "search",
   "user" : "alice22",
@@ -15669,7 +15724,7 @@
   "command" : "addAlbum",
   "user" : "cbutler",
   "timestamp" : 12659,
-  "message" : "cbutler has added new album successfully."
+  "message" : "The username cbutler doesn't exist."
 }, {
   "command" : "search",
   "user" : "alice22",
@@ -15845,7 +15900,7 @@
   "command" : "addAlbum",
   "user" : "cbutler",
   "timestamp" : 12769,
-  "message" : "cbutler has added new album successfully."
+  "message" : "The username cbutler doesn't exist."
 }, {
   "command" : "search",
   "user" : "bob35",
@@ -16229,7 +16284,7 @@
   "command" : "addAlbum",
   "user" : "cbutler",
   "timestamp" : 13009,
-  "message" : "cbutler has added new album successfully."
+  "message" : "The username cbutler doesn't exist."
 }, {
   "command" : "search",
   "user" : "frank21",
@@ -16325,7 +16380,7 @@
   "command" : "addAlbum",
   "user" : "cbutler",
   "timestamp" : 13069,
-  "message" : "cbutler has added new album successfully."
+  "message" : "The username cbutler doesn't exist."
 }, {
   "command" : "search",
   "user" : "bob35",
@@ -19233,7 +19288,7 @@
 }, {
   "command" : "getAllUsers",
   "timestamp" : 14849,
-  "result" : [ "alice22", "bob35", "carol19", "david27", "emily30", "frank21", "grace25", "henry26", "irene33", "jack29", "barmstrong", "matthewporter", "amanda16", "cbutler", "jacobdean", "matthewfernandez", "leslie27", "nancymontgomery", "conniealvarez", "jenningsbeth", "charlesgarcia" ]
+  "result" : [ "alice22", "bob35", "carol19", "david27", "emily30", "frank21", "grace25", "henry26", "irene33", "jack29", "barmstrong", "matthewporter", "amanda16", "jacobdean", "matthewfernandez", "leslie27", "nancymontgomery", "conniealvarez", "jenningsbeth", "charlesgarcia" ]
 }, {
   "command" : "getTop5Playlists",
   "timestamp" : 14849,
@@ -19246,4 +19301,8 @@
   "command" : "getTop5Albums",
   "timestamp" : 14849,
   "result" : [ "Alone Autumn", "Alone Dirt", "Alone Funeral ", "Alone Guide", "Alone Hood" ]
+}, {
+  "command" : "getTop5Artists",
+  "timestamp" : 14849,
+  "result" : [ null ]
 } ]

@@ -33,6 +33,26 @@
   "timestamp" : 40,
   "result" : [ ]
 }, {
+  "command" : "addEvent",
+  "user" : "melodymaster",
+  "timestamp" : 45,
+  "message" : "melodymaster has added new event successfully."
+}, {
+  "command" : "addEvent",
+  "user" : "melodymaster",
+  "timestamp" : 50,
+  "message" : "melodymaster has added new event successfully."
+}, {
+  "command" : "addEvent",
+  "user" : "alice23",
+  "timestamp" : 55,
+  "message" : "The username alice23 doesn't exist."
+}, {
+  "command" : "addEvent",
+  "user" : "bob35",
+  "timestamp" : 60,
+  "message" : "bob35 is not an artist."
+}, {
   "command" : "search",
   "user" : "alice22",
   "timestamp" : 65,
@@ -44,10 +64,35 @@
   "timestamp" : 70,
   "message" : "The selected ID is too high."
 }, {
+  "command" : "addMerch",
+  "user" : "melodymaster",
+  "timestamp" : 80,
+  "message" : "melodymaster has added new merchandise successfully."
+}, {
+  "command" : "addMerch",
+  "user" : "melodymaster",
+  "timestamp" : 85,
+  "message" : "melodymaster has added new merchandise successfully."
+}, {
   "command" : "switchConnectionStatus",
   "user" : "alice22",
   "timestamp" : 87,
   "message" : "alice22 has changed status successfully."
+}, {
+  "command" : "addMerch",
+  "user" : "melodymaster",
+  "timestamp" : 90,
+  "message" : "Price for merchandise can not be negative."
+}, {
+  "command" : "addMerch",
+  "user" : "Melodic Hoodie",
+  "timestamp" : 95,
+  "message" : "The username Melodic Hoodie doesn't exist."
+}, {
+  "command" : "addMerch",
+  "user" : "melodymaster",
+  "timestamp" : 100,
+  "message" : "melodymaster has merchandise with the same name."
 }, {
   "command" : "search",
   "user" : "alice22",

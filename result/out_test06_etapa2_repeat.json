@@ -131,6 +131,11 @@
   "timestamp" : 1009,
   "message" : "Successfully added to playlist."
 }, {
+  "command" : "removeAlbum",
+  "user" : "melodymaster",
+  "timestamp" : 1010,
+  "message" : "melodymaster can't delete this album."
+}, {
   "command" : "search",
   "user" : "alice22",
   "timestamp" : 1010,

@@ -31,6 +31,22 @@ public final class Admin {
     private Admin() {
     }
 
+    private static Admin instance = null;
+
+    /**
+     * Singleton.
+     */
+    public static Admin getInstance() {
+        if (instance == null) {
+            synchronized (Admin.class) {
+                if (instance == null) {
+                    instance = new Admin();
+                }
+            }
+        }
+        return instance;
+    }
+
     /**
      * Sets users.
      *
@@ -311,5 +327,43 @@ public final class Admin {
         }
 
         return onlineUsers;
+    }
+
+    /**
+     * Adds a podcast in the list.
+     *
+     * @param podcast the podcast to be added
+     */
+    public static void addPodcast(final Podcast podcast) {
+        podcasts.add(podcast);
+    }
+
+    /**
+     * Removes a podcast from the system after ensuring that it
+     * is not currently being played by any user.
+     * The method iterates through all users to check if any of
+     * them are playing the specified podcast.
+     * If the podcast is not being played, it attempts to
+     * remove it from the list of podcasts.
+     *
+     * @param podcastName The name of the podcast to be removed.
+     * @return A message indicating the success or failure of the operation.
+     */
+    public static String removePodcast(final String podcastName) {
+        // Check if any user is playing the specified podcast
+        for (User user : users) {
+            if (user.isPlayingPodcast(podcastName)) {
+                return "Cannot remove the podcast '" + podcastName
+                        + "' as it is currently being played.";
+            }
+        }
+
+        boolean removed = podcasts.removeIf(podcast -> podcast.getName().
+                equalsIgnoreCase(podcastName));
+        if (removed) {
+            return "Podcast '" + podcastName + "' removed successfully.";
+        } else {
+            return "Podcast '" + podcastName + "' not found.";
+        }
     }
 }

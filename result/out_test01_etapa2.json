@@ -98,7 +98,7 @@
   "user" : "alice22",
   "timestamp" : 180,
   "message" : "alice22 is offline.",
-  "results" : [ "Stairway to Heaven", "Black Dog", "Whole Lotta Love", "Good Times Bad Times" ]
+  "results" : [ ]
 }, {
   "command" : "switchConnectionStatus",
   "user" : "alice22",
@@ -145,6 +145,6 @@
     "remainedTime" : 134,
     "repeat" : "No Repeat",
     "shuffle" : false,
-    "paused" : true
+    "paused" : false
   }
 } ]

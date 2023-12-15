@@ -1,20 +1,37 @@
 package app.user;
 
 import app.Admin;
-import app.audio.Collections.*;
+import app.audio.Collections.AudioCollection;
+import app.audio.Collections.PlaylistOutput;
+import app.audio.Collections.Album;
+import app.audio.Collections.AlbumOutput;
+import app.audio.Collections.Podcast;
+import app.audio.Collections.PodcastOutput;
+import app.audio.Collections.Event;
+import app.audio.Collections.Announcement;
+import app.audio.Collections.Merchandise;
+import app.audio.Collections.Playlist;
+
 import app.audio.Files.AudioFile;
+import app.audio.Files.Episode;
 import app.audio.Files.Song;
 import app.audio.LibraryEntry;
+//import app.pages.Host;
+//import app.pages.Home;
+//import app.pages.LikedContent;
+//import app.pages.Artist;
+//import app.pages.Page;
 import app.player.Player;
 import app.player.PlayerStats;
 import app.searchBar.Filters;
 import app.searchBar.SearchBar;
 import app.utils.Enums;
+import fileio.input.EpisodeInput;
 import fileio.input.SongInput;
 import lombok.Getter;
 import lombok.Setter;
-import org.checkerframework.checker.units.qual.A;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -39,6 +56,14 @@ public class User {
     private ArrayList<Album> albums;
     @Getter
     private ArrayList<Playlist> followedPlaylists;
+    @Getter
+    private final List<Merchandise> merchandiseList;
+    @Getter
+    private final List<Event> events;
+    @Getter
+    private final List<Announcement> announcements;
+    @Getter
+    private final List<Podcast> createdPodcasts;
     private final Player player;
     private final SearchBar searchBar;
     private boolean lastSearched;
@@ -60,14 +85,18 @@ public class User {
         this.age = age;
         this.city = city;
         this.type = type;
-        isConnected = true;
         playlists = new ArrayList<>();
+        albums = new ArrayList<>();
         likedSongs = new ArrayList<>();
         followedPlaylists = new ArrayList<>();
-        albums = new ArrayList<>();
         player = new Player();
         searchBar = new SearchBar(username);
         lastSearched = false;
+        isConnected = true;
+        this.merchandiseList = new ArrayList<>();
+        this.events = new ArrayList<>();
+        this.announcements = new ArrayList<>();
+        this.createdPodcasts = new ArrayList<>();
     }
 
     /**
@@ -78,16 +107,28 @@ public class User {
      * @return the array list
      */
     public ArrayList<String> search(final Filters filters, final String type) {
+        if (!isConnected) {
+            return new ArrayList<>();
+        }
+
         searchBar.clearSelection();
         player.stop();
 
         lastSearched = true;
         ArrayList<String> results = new ArrayList<>();
-        List<LibraryEntry> libraryEntries = searchBar.search(filters, type);
 
-        for (LibraryEntry libraryEntry : libraryEntries) {
-            results.add(libraryEntry.getName());
+        if ("artist".equalsIgnoreCase(this.type) || "host".equalsIgnoreCase(this.type)) {
+            List<User> users = searchBar.searchUsers(filters, type);
+            for (User user : users) {
+                results.add(user.getUsername());
+            }
+        } else {
+            List<LibraryEntry> libraryEntries = searchBar.search(filters, type);
+            for (LibraryEntry libraryEntry : libraryEntries) {
+                results.add(libraryEntry.getName());
+            }
         }
+
         return results;
     }
 
@@ -98,19 +139,32 @@ public class User {
      * @return the string
      */
     public String select(final int itemNumber) {
+        if (!isConnected) {
+            return "User is offline. Cannot make a selection.";
+        }
         if (!lastSearched) {
             return "Please conduct a search before making a selection.";
         }
 
         lastSearched = false;
 
-        LibraryEntry selected = searchBar.select(itemNumber);
+        if ("artist".equalsIgnoreCase(this.type) || "host".equalsIgnoreCase(this.type)) {
+            User selectedUser = searchBar.selectUser(itemNumber);
 
-        if (selected == null) {
-            return "The selected ID is too high.";
+            if (selectedUser == null) {
+                return "The selected ID is too high.";
+            }
+
+            return "Successfully selected user: " + selectedUser.getUsername();
+        } else {
+            LibraryEntry selected = searchBar.select(itemNumber);
+
+            if (selected == null) {
+                return "The selected ID is too high.";
+            }
+
+            return "Successfully selected %s.".formatted(selected.getName());
         }
-
-        return "Successfully selected %s.".formatted(selected.getName());
     }
 
     /**
@@ -119,12 +173,16 @@ public class User {
      * @return the string
      */
     public String load() {
+        if (!isConnected) {
+            return "User is offline. Cannot load the source.";
+        }
+
         if (searchBar.getLastSelected() == null) {
             return "Please select a source before attempting to load.";
         }
 
         if (!searchBar.getLastSearchType().equals("song")
-            && ((AudioCollection) searchBar.getLastSelected()).getNumberOfTracks() == 0) {
+                && ((AudioCollection) searchBar.getLastSelected()).getNumberOfTracks() == 0) {
             return "You can't load an empty audio collection!";
         }
 
@@ -166,27 +224,15 @@ public class User {
         }
 
         Enums.RepeatMode repeatMode = player.repeat();
-        String repeatStatus = "";
+        String repeatStatus;
 
         switch (repeatMode) {
-            case NO_REPEAT -> {
-                repeatStatus = "no repeat";
-            }
-            case REPEAT_ONCE -> {
-                repeatStatus = "repeat once";
-            }
-            case REPEAT_ALL -> {
-                repeatStatus = "repeat all";
-            }
-            case REPEAT_INFINITE -> {
-                repeatStatus = "repeat infinite";
-            }
-            case REPEAT_CURRENT_SONG -> {
-                repeatStatus = "repeat current song";
-            }
-            default -> {
-                repeatStatus = "";
-            }
+            case NO_REPEAT -> repeatStatus = "no repeat";
+            case REPEAT_ONCE -> repeatStatus = "repeat once";
+            case REPEAT_ALL -> repeatStatus = "repeat all";
+            case REPEAT_INFINITE -> repeatStatus = "repeat infinite";
+            case REPEAT_CURRENT_SONG -> repeatStatus = "repeat current song";
+            default -> repeatStatus = "";
         }
 
         return "Repeat mode changed to %s.".formatted(repeatStatus);
@@ -204,7 +250,7 @@ public class User {
         }
 
         if (!player.getType().equals("playlist")) {
-            return "The loaded source is not a playlist.";
+            return "The loaded source is not a playlist or an album.";
         }
 
         player.shuffle(seed);
@@ -233,7 +279,6 @@ public class User {
 
         return "Skipped forward successfully.";
     }
-
 
     /**
      * Backward string.
@@ -273,13 +318,16 @@ public class User {
         if (likedSongs.contains(song)) {
             likedSongs.remove(song);
             song.dislike();
-
             return "Unlike registered successfully.";
         }
 
-        likedSongs.add(song);
-        song.like();
-        return "Like registered successfully.";
+        if (!isConnected()) {
+            return username + " is offline.";
+        } else {
+            likedSongs.add(song);
+            song.like();
+            return "Like registered successfully.";
+        }
     }
 
     /**
@@ -443,8 +491,19 @@ public class User {
      * @return the player stats
      */
     public PlayerStats getPlayerStats() {
-        return player.getStats();
+        PlayerStats currentStats = player.getStats();
+        boolean pausedStatus = currentStats.isPaused();
+
+        if (!isConnected) {
+            pausedStatus = false;
+        }
+
+        Enums.RepeatMode repeatMode = getRepeatModeFromString(currentStats.getRepeat());
+
+        return new PlayerStats(currentStats.getName(), currentStats.getRemainedTime(),
+                repeatMode, currentStats.isShuffle(), pausedStatus);
     }
+
 
     /**
      * Show preferred songs array list.
@@ -484,7 +543,8 @@ public class User {
             }
         }
 
-        String preferredGenre = mostLikedIndex != -1 ? genres[mostLikedIndex] : "unknown";
+        String preferredGenre = mostLikedIndex != -1 ? genres[mostLikedIndex]
+                : "unknown";
         return "This user's preferred genre is %s.".formatted(preferredGenre);
     }
 
@@ -641,4 +701,193 @@ public class User {
      * @param merchandiseName The name of the merchandise to check.
      * @return true if merchandise with the same name exists, false otherwise.
      */
+
+    /**
+     * Checks if merchandise with a given name already exists.
+     *
+     * @param merchandiseName The name of the merchandise to check.
+     * @return true if merchandise with the same name exists, false otherwise.
+     */
+    public boolean doesMerchandiseExist(final String merchandiseName) {
+        return merchandiseList.stream()
+                .anyMatch(merch -> merch.getName().equalsIgnoreCase(merchandiseName));
+    }
+
+    /**
+     * Add a new merch for the user.
+     *
+     * @param name        Name of the article.
+     * @param description Description of the article.
+     * @param price       Price of the article.
+     * @return Message.
+     */
+    public String addMerchandise(final String name, final String description, final double price) {
+        Merchandise newMerch = new Merchandise(name, description, price);
+        if (!this.isArtist()) {
+            return username + " is not an artist.";
+        }
+        if (price < 0) {
+            return "Price for merchandise can not be negative.";
+        }
+        if (doesMerchandiseExist(name)) {
+            return username + " has merchandise with the same name.";
+        }
+        merchandiseList.add(newMerch);
+        return username + " has added new merchandise successfully.";
+    }
+
+    /**
+     * Add a new event for user.
+     *
+     * @param name        Name of the event.
+     * @param date        Event date.
+     * @param description Description of the event.
+     */
+    public void addEvent(final String name, final LocalDate date, final String description) {
+        Event newEvent = new Event(name, date, description);
+        events.add(newEvent);
+    }
+
+    /**
+     * Add a new announcement for user.
+     *
+     * @param name        Name of the announcement.
+     * @param description Description of the announcement.
+     * @return Message.
+     */
+    public String addAnnouncement(final String name, final String description) {
+        if (!this.isHost()) {
+            return username + " is not a host.";
+        }
+
+        for (Announcement announcement : announcements) {
+            if (announcement.getName().equalsIgnoreCase(name)) {
+                return username + " has already added an announcement with this name.";
+            }
+        }
+
+        Announcement newAnnouncement = new Announcement(name, description);
+        announcements.add(newAnnouncement);
+
+        return username + " has successfully added new announcement.";
+    }
+
+    /**
+     * Check if it has unique.
+     *
+     * @param eventName name.
+     */
+    public boolean hasEventWithName(final String eventName) {
+        return events.stream().anyMatch(event -> event.getName().equalsIgnoreCase(eventName));
+    }
+
+    /**
+     * Remove event.
+     *
+     * @param eventName event.
+     */
+    public String removeEvent(final String eventName) {
+        for (int i = 0; i < events.size(); i++) {
+            if (events.get(i).getName().equalsIgnoreCase(eventName)) {
+                events.remove(i);
+                return "Event '" + eventName + "' has been removed successfully.";
+            }
+        }
+        return "Event '" + eventName + "' not found.";
+    }
+
+    /**
+     * Remove announcement.
+     *
+     * @param announcementName announcement.
+     */
+    public String removeAnnouncement(final String announcementName) {
+        for (int i = 0; !announcements.isEmpty(); i++) {
+            if (announcements.get(i).getName().equalsIgnoreCase(announcementName)) {
+                announcements.remove(i);
+                return "Announcement '" + announcementName
+                        + "' has been removed successfully.";
+            }
+        }
+        return "Announcement '" + announcementName + "' not found.";
+    }
+
+    /**
+     * Adds a new podcast with episodes to the user's collection and Admins list.
+     * Ensures that each episode in the podcast has a unique name.
+     *
+     * @param type         The user's type (artist or host).
+     * @param podcastName  The name of the new podcast.
+     * @param episodeInputs List of EpisodeInput objects representing the episodes to be added.
+     * @return A message indicating the success or failure of the podcast addition.
+     */
+    public String addPodcast(final String type, final String podcastName,
+                             final List<EpisodeInput> episodeInputs) {
+        if (type == null || type.equals("artist")) {
+            return username + " is not a host.";
+        }
+
+        if (createdPodcasts.stream().anyMatch(p -> p.getName().equals(podcastName))) {
+            return username + " has another podcast with the same name.";
+        }
+
+        Set<String> episodeNames = new HashSet<>();
+        List<Episode> episodes = new ArrayList<>();
+        for (EpisodeInput episodeInput : episodeInputs) {
+            // Check for duplicate episode names
+            if (!episodeNames.add(episodeInput.getName())) {
+                return username + " has the same episode in this podcast.";
+            }
+            Episode newEpisode = new Episode(episodeInput.getName(),
+                    episodeInput.getDuration(), episodeInput.getDescription());
+            episodes.add(newEpisode);
+        }
+
+        Podcast newPodcast = new Podcast(podcastName, username, episodes);
+        createdPodcasts.add(newPodcast);
+        Admin.addPodcast(newPodcast);
+
+        return username + " has added new podcast successfully.";
+    }
+
+    /**
+     * Shows the podcasts associated with the user.
+     * Converts each podcast to an podcastOutput format for display or further processing.
+     *
+     * @return An ArrayList of PodcastOutput objects representing the user's podcasts.
+     */
+    public ArrayList<PodcastOutput> showPodcasts() {
+        ArrayList<PodcastOutput> podcastOutputs = new ArrayList<>();
+        for (Podcast podcast : this.createdPodcasts) {
+            podcastOutputs.add(new PodcastOutput(podcast));
+        }
+        return podcastOutputs;
+    }
+
+    /**
+     * Checks if a podcast with a given name is currently being played by the user.
+     * This method determines if the current audio file being played is an
+     * episode belonging to the specified podcast.
+     *
+     * @param podcastName The name of the podcast to check for current playback.
+     * @return true if the current audio file is an episode of the
+     * specified podcast, false otherwise.
+     */
+    public boolean isPlayingPodcast(final String podcastName) {
+        if (player.getCurrentAudioFile() instanceof Episode currentEpisode) {
+            return createdPodcasts.stream()
+                    .filter(podcast -> podcast.getName().equalsIgnoreCase(podcastName))
+                    .anyMatch(podcast -> podcast.getEpisodes().contains(currentEpisode));
+        }
+        return false;
+    }
+
+    /**
+     * Get podcast
+     *
+     * @return podcast list.
+     */
+    public List<Podcast> getPodcasts() {
+        return createdPodcasts;
+    }
 }

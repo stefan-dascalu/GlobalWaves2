@@ -34,7 +34,7 @@
   "command" : "like",
   "user" : "alice22",
   "timestamp" : 280,
-  "message" : "Like registered successfully."
+  "message" : "alice22 is offline."
 }, {
   "command" : "addUser",
   "user" : "melodymaster",

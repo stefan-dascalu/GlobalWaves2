@@ -130,6 +130,11 @@
   "timestamp" : 2555,
   "message" : "Please load a source before attempting to forward."
 }, {
+  "command" : "deleteUser",
+  "user" : "melodymaster",
+  "timestamp" : 2760,
+  "message" : "melodymaster was successfully deleted."
+}, {
   "command" : "load",
   "user" : "emily30",
   "timestamp" : 3000,
@@ -241,6 +246,11 @@
   "timestamp" : 3335,
   "message" : "Please load a source before setting the repeat status."
 }, {
+  "command" : "deleteUser",
+  "user" : "melodymaster",
+  "timestamp" : 3335,
+  "message" : "melodymaster can't be deleted."
+}, {
   "command" : "search",
   "user" : "rhythmicrider58",
   "timestamp" : 3380,
@@ -293,6 +303,11 @@
   "user" : "rhythmicrider58",
   "timestamp" : 3440,
   "message" : "Playback loaded successfully."
+}, {
+  "command" : "deleteUser",
+  "user" : "emily30",
+  "timestamp" : 3443,
+  "message" : "emily30 was successfully deleted."
 }, {
   "command" : "like",
   "user" : "rhythmicrider58",

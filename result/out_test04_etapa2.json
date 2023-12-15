@@ -90,6 +90,11 @@
   "timestamp" : 120,
   "message" : "Please load a source before liking or unliking."
 }, {
+  "command" : "deleteUser",
+  "user" : "beatblazer",
+  "timestamp" : 150,
+  "message" : "beatblazer was successfully deleted."
+}, {
   "command" : "search",
   "user" : "alice22",
   "timestamp" : 190,
@@ -106,10 +111,20 @@
   "timestamp" : 285,
   "message" : "Playback loaded successfully."
 }, {
+  "command" : "deleteUser",
+  "user" : "beatblazer",
+  "timestamp" : 1158,
+  "message" : "beatblazer can't be deleted."
+}, {
   "command" : "prev",
   "user" : "alice22",
   "timestamp" : 1159,
   "message" : "Returned to previous track successfully. The current track is Melodic Motion."
+}, {
+  "command" : "deleteUser",
+  "user" : "beatblazer",
+  "timestamp" : 1380,
+  "message" : "beatblazer can't be deleted."
 }, {
   "command" : "search",
   "user" : "melodicmind42",
